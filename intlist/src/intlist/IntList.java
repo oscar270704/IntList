@@ -1,4 +1,5 @@
 package intlist;
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 /**
@@ -40,7 +41,8 @@ public class IntList {
 	{return elements.clone();}
 	
 	/** dit is een inspector dus eig had je hier best 'get' voor gezet 
-	 * post |result == IntArray().length
+	 * post result == IntArray().length  dit heb ik moeten wegdoen van chatgpt want leidde tot stackoverflow want loop
+	 *@post | 0<= result
 	 */
 	public int ListLength()
 	{return elements.length;}
@@ -95,20 +97,28 @@ public class IntList {
 	
 	/**
 	 * maakt nieuwe lege 'IntList' aan 
-	 * post |ListLength() == 0 
+	 * @post |ListLength() == 0 
 	 */
 	public IntList()
 	{elements = new int[0];}
 	
 	
 	/** MUTATOR
+	 * @mutates |this
+	 * als je mutates this schrijft moet je de volledig de nieuwe toestand specifiëren 
+	 * 
 	 * laat de klant toe een nieuw element toe te voegen aan het einde van de reeks 
 	 * gebruik hier niet elements.length maar ListLength ( in je contracten moet je abstracte toestanden
 	 * gebruiken. de klant kent/ziet elements niet en dit mag dus enkel intern gebruikt worden
-	 * @post nieuwe lijst heeft lengte + 1
-	 * 		| ListLength() == old(ListLength())+ 1
+	 * 
+	 *  nieuwe lijst heeft lengte + 1
+	 * @post	| ListLength() == old(ListLength())+ 1
 	 * @post 'x'staat op laatste positie
-	 * 		| IntAtIndex(ListLength() - 1) == x
+	 * 		| IntAtIndex(old(ListLength())) == x
+	 * 
+	 *om nieuwe toestand volledig te specifiëren moeten we  nu ook nog zeggen
+	 *dat de bestaande toestanden op hun indeces blijven staa
+	 *@post | Arrays.equals(IntArray(), 0 , old(ListLength()), old(IntArray()), 0, old(ListLength()))
 	 * 
 	 */
 	public void  Add(int x) {
