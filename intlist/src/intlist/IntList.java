@@ -118,6 +118,8 @@ public class IntList {
 	 * 
 	 *om nieuwe toestand volledig te specifiëren moeten we  nu ook nog zeggen
 	 *dat de bestaande toestanden op hun indeces blijven staa
+	 *
+	 *betekenis code: Arrays.equals(a, aFrom, aTo, b, bFrom, bTo)
 	 *@post | Arrays.equals(IntArray(), 0 , old(ListLength()), old(IntArray()), 0, old(ListLength()))
 	 * 
 	 */
@@ -130,11 +132,19 @@ public class IntList {
 	
 	
 	/** MUTATOR
+	 * 
+	 * @mutates |this
+	 * 	als je mutates this schrijft moet je de volledig de nieuwe toestand specifiëren 
+	 * 
+	 * 
 	 * laat de klant toe element te verwijderen aan het einde van de reeks 
 	 * @pre er moet nog een element zijn dat verwijderd kan worden
 	 * 		|ListLength() > 0
 	 * @post lengte met 1 gedaald
 	 * 		|ListLength() == old(ListLength()) - 1
+	 * 
+	 * om volledige toestand te specifiëren moeten we nu ook nog zeggen dat de niet verwijderde elementen hetzellfde blivjen
+	 * @post | Arrays.equals(IntArray(), 0, ListLength(), old(IntArray()), 0, ListLength())
 	 * 
 	 */
 	public void Del() {
